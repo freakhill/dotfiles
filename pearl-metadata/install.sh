@@ -1,9 +1,11 @@
 post_install() {
-    # install basher
+    info "installing basher, because basher links bins and mans etc. nicely"
     git clone https://github.com/basherpm/basher.git ~/.basher
     export PATH="$HOME/.basher/bin:$PATH"
     eval "$(basher init -)"
     basher update
+
+    info "installing usual packages"
     basher install sstephenson/bats           # tests in bash
     basher install jimeh/stub.sh              # stub bash
     basher install freakhill/scripts          # my script
@@ -13,16 +15,20 @@ post_install() {
     basher install paoloantinori/hhighlighter # highlights
     basher install shyiko/commacd             # ,(forward) ,,(back) ,,,(both)
     basher install tests-always-included/mo   # moustache templates in bash
-    # fzf requires a post basher install script
+
+    info "running fzf install script"
     $HOME/.basher/cellar/packages/junegunn/fzf/install
-    # ensure that the ssh/scp scripts are usable
+
+    info "make sur that our homemade ssh/scp scripts run fine"
     mkdir -p $HOME/.ssh/config.0
     touch $HOME/.ssh/config
     chmod 700 $HOME/.ssh
     chmod 600 $HOME/config
-    # golang folder
+
+    info "create the golang go folder"
     mkdir -p $HOME/go
 
+    info "link tmux and git config"
     link tmux "$PEARL_PKGDIR/tmux.conf"
     link git  "$PEARL_PKGDIR/gitconfig"
 }
@@ -32,6 +38,7 @@ pre_update() {
 }
 
 post_update() {
+    info "updating basher stuff"
     basher update
     for p in `basher outdated`
     do
@@ -40,7 +47,10 @@ post_update() {
 }
 
 pre_remove() {
-    echo "nothing yet in uninstall..."
+    unlink tmux "$PEARL_PKGDIR/tmux.conf"
+    unlink git  "$PEARL_PKGDIR/gitconfig"
+    info "removing basher"
+    rm -fr ~/.basher
 }
 
 post_remove() {
