@@ -32,6 +32,10 @@ post_install() {
     info "link tmux and git config"
     link tmux "$PEARL_PKGDIR/tmux.conf"
     link git  "$PEARL_PKGDIR/gitconfig"
+
+    cat <<EOF > ~/.bash_profile
+[ -f ~/.bashrc ] && source ~/.bashrc
+EOF
 }
 
 pre_update() {
