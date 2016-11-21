@@ -20,10 +20,11 @@ post_install() {
     $HOME/.basher/cellar/packages/junegunn/fzf/install
 
     info "make sur that our homemade ssh/scp scripts run fine"
-    mkdir -p $HOME/.ssh/config.0
-    touch $HOME/.ssh/config
     chmod 700 $HOME/.ssh
-    chmod 600 $HOME/config
+    mkdir -p $HOME/.ssh/config.0
+    chmod 700 $HOME/.ssh/config.0
+    touch $HOME/.ssh/config
+    chmod 600 $HOME/.ssh/config
 
     info "create the golang go folder"
     mkdir -p $HOME/go
