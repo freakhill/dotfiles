@@ -14,7 +14,24 @@ eval "$(fasd --init auto)"
 [[ $- = *i* ]] && source $HOME/.basher/cellar/packages/jimeh/stub.sh/stub.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-[ -f ~/Dropbox/bash_history ] && ln -sf ~/Dropbox/bash_history ~/.bash_history
+
+# link bash history from dropbox
+if ! [ -f ~/.dropbox_linked ]
+then
+  if [ -f ~/Dropbox/bash_history ]
+  then
+    ln -sf ~/Dropbox/bash_history ~/.bash_history
+    touch ~/.dropbox_linked
+  elif [ -f /host/Dropbox/bash_history ]
+  then
+    ln -sf /host/Dropbox/bash_history ~/.bash_history
+    touch ~/.dropbox_linked
+  elif [ -f /Dropbox ]
+  then
+    ln -sf /Dropbox ~/.bash_history
+    touch ~/.dropbox_linked
+  fi
+fi
 
 ## hh configuration after fzf to overwrite the C-R binding
 # add this configuration to ~/.bashrc
