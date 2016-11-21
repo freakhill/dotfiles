@@ -1,13 +1,12 @@
+export PATH=$PATH:$HOME/.local/bin:$HOME/.basher/bin:$GOPATH/bin
 export GOPATH=$HOME/go
 
 eval "$(basher init -)"
 eval "$(thefuck --alias)"
 eval "$(fasd --init auto)"
 
-[[ $- = *i* ]] && source $HOME/.basher/cellar/packages/nojhan/liquidprompt/liquidprompt
 [[ $- = *i* ]] && source $HOME/.basher/cellar/packages/freakhill/scripts/lib/ssh_completion
 [[ $- = *i* ]] && source $HOME/.basher/cellar/packages/freakhill/scripts/lib/git_completion
-[[ $- = *i* ]] && source $HOME/.basher/cellar/packages/erichs/composure/composure.sh
 [[ $- = *i* ]] && source $HOME/.basher/cellar/packages/paoloantinori/hhighlighter/h.sh
 [[ $- = *i* ]] && source $HOME/.basher/cellar/packages/shyiko/commacd/commacd.bash
 [[ $- = *i* ]] && source $HOME/.basher/cellar/packages/tests-always-included/mo/mo
@@ -45,5 +44,5 @@ export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file s
 [[ $- = *i* ]] && bind '"\C-r": "\C-a hh \C-j"'
 
 alias ll='ls -lG'
+alias lla='ls -alG'
 
-export PATH=$PATH:$HOME/.local/bin:$HOME/.basher/bin:$GOPATH/bin
