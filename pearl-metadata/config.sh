@@ -43,6 +43,5 @@ export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file s
 # if this is interactive shell, then bind hh to Ctrl-r
 [[ $- = *i* ]] && bind '"\C-r": "\C-a hh \C-j"'
 
-alias ll='ls -lG'
-alias lla='ls -alG'
-
+alias ll='ls -lG --color'
+alias lla='ll -a'
