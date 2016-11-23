@@ -16,9 +16,9 @@ post_install() {
     ( basher install shyiko/commacd )            # ,(forward) ,,(back) ,,,(both)
     ( basher install tests-always-included/mo )  # moustache templates in bash
 
-#    info "running fzf install script"
-#    $HOME/.basher/cellar/packages/junegunn/fzf/install
-#
+    info "running fzf install script"
+    ( $HOME/.basher/cellar/packages/junegunn/fzf/install )
+
     info "make sur that our homemade ssh/scp scripts run fine"
     mkdir -p $HOME/.ssh/config.0
     mkdir -p $HOME/.ssh/backups
@@ -54,7 +54,7 @@ post_update() {
     ( basher update )
     for p in `basher outdated`
     do
-        basher upgrade $p
+        ( basher upgrade $p )
     done
 }
 
