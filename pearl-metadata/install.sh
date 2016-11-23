@@ -43,6 +43,7 @@ post_install() {
     cat <<EOF > ~/.bash_profile
 [ -f ~/.bashrc ] && source ~/.bashrc
 EOF
+    info "gorogoro"
 }
 
 pre_update() {
