@@ -1,5 +1,5 @@
 post_install() {
-    (
+    $(
         info "installing basher, because basher links bins and mans etc. nicely"
         git clone https://github.com/basherpm/basher.git ~/.basher
         export PATH="$HOME/.basher/bin:$PATH"
@@ -58,7 +58,7 @@ pre_update() {
 }
 
 post_update() {
-    (
+    $(
         info "NYI"
         basher update
         for p in `basher outdated`
