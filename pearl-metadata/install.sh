@@ -27,7 +27,7 @@ post_install() {
     touch $HOME/.ssh/config
     chmod 600 $HOME/.ssh/config
 
-    [ "$(ls -A $HOME/.ssh/config.0)" ] && echo "config.0 not empty" \
+    [ "$(ls -A $HOME/.ssh/config.0)" ] && info "config.0 not empty" \
 	    || cp $HOME/.ssh/config $HOME/.ssh/config.0/oldconfig
 
     info "create the golang go folder"
@@ -46,11 +46,11 @@ EOF
 }
 
 pre_update() {
-    echo "nothing yet in pre-update..."
+    info "NYI"
 }
 
 post_update() {
-    info "updating basher stuff"
+    info "NYI"
     ( basher update )
     for p in `basher outdated`
     do
@@ -66,5 +66,5 @@ pre_remove() {
 }
 
 post_remove() {
-    echo "nothing yet in post-remove..."
+    info "NYI"
 }
