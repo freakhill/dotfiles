@@ -40,10 +40,9 @@ post_install() {
     ln -s "$PEARL_PKGDIR/gitconfig" $HOME/.gitconfig
 
     info "adding bashrc source to bash_profile for ssh"
-    cat <<EOF > ~/.bash_profile
-[ -f ~/.bashrc ] && source ~/.bashrc
-EOF
-    return 0
+#    cat <<EOF > ~/.bash_profile
+#[ -f ~/.bashrc ] && source ~/.bashrc
+#EOF
 }
 
 pre_update() {
