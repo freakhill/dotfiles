@@ -19,30 +19,30 @@ post_install() {
 #    info "running fzf install script"
 #    $HOME/.basher/cellar/packages/junegunn/fzf/install
 #
-#    info "make sur that our homemade ssh/scp scripts run fine"
-#    mkdir -p $HOME/.ssh/config.0
-#    mkdir -p $HOME/.ssh/backups
-#    touch $HOME/.ssh/config.0/empty
-#    touch $HOME/.ssh/settings
-#    touch $HOME/.ssh/config
-#    chmod 600 $HOME/.ssh/config
-#
-#    [ "$(ls -A $HOME/.ssh/config.0)" ] && echo "config.0 not empty" \
-#	    || cp $HOME/.ssh/config $HOME/.ssh/config.0/oldconfig
-#
-#    info "create the golang go folder"
-#    mkdir -p $HOME/go
-#
-#    info "link tmux and git config"
-#    rm -f $HOME/.tmux.conf
-#    rm -f $HOME/.gitconfig
-#    ln -s "$PEARL_PKGDIR/tmux.conf" $HOME/.tmux.conf
-#    ln -s "$PEARL_PKGDIR/gitconfig" $HOME/.gitconfig
-#
-#    info "adding bashrc source to bash_profile for ssh"
-#    cat <<EOF > ~/.bash_profile
-#[ -f ~/.bashrc ] && source ~/.bashrc
-#EOF
+    info "make sur that our homemade ssh/scp scripts run fine"
+    mkdir -p $HOME/.ssh/config.0
+    mkdir -p $HOME/.ssh/backups
+    touch $HOME/.ssh/config.0/empty
+    touch $HOME/.ssh/settings
+    touch $HOME/.ssh/config
+    chmod 600 $HOME/.ssh/config
+
+    [ "$(ls -A $HOME/.ssh/config.0)" ] && echo "config.0 not empty" \
+	    || cp $HOME/.ssh/config $HOME/.ssh/config.0/oldconfig
+
+    info "create the golang go folder"
+    mkdir -p $HOME/go
+
+    info "link tmux and git config"
+    rm -f $HOME/.tmux.conf
+    rm -f $HOME/.gitconfig
+    ln -s "$PEARL_PKGDIR/tmux.conf" $HOME/.tmux.conf
+    ln -s "$PEARL_PKGDIR/gitconfig" $HOME/.gitconfig
+
+    info "adding bashrc source to bash_profile for ssh"
+    cat <<EOF > ~/.bash_profile
+[ -f ~/.bashrc ] && source ~/.bashrc
+EOF
 }
 
 pre_update() {
