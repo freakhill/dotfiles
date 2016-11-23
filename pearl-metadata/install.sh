@@ -1,6 +1,6 @@
 post_install() {
     # basher breaks stuff...
-cat <<EOF | sh -s
+cat <<EOF | bash -s
         echo "installing basher, because basher links bins and mans etc. nicely"
         git clone https://github.com/basherpm/basher.git ~/.basher
         export PATH="$HOME/.basher/bin:$PATH"
