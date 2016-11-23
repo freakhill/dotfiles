@@ -6,15 +6,15 @@ post_install() {
     ( basher update ) # in a subshell to capture some kind of latent exit
 
     info "installing usual packages"
-    basher install sstephenson/bats           # tests in bash
-    basher install jimeh/stub.sh              # stub bash
-    basher install freakhill/scripts          # my script
-    basher install fidian/ansi                # colors and window title
-    basher install clvv/fasd                  # File Any Search Dir
-    basher install junegunn/fzf               # fuzzy file finder
-    basher install paoloantinori/hhighlighter # highlights
-    basher install shyiko/commacd             # ,(forward) ,,(back) ,,,(both)
-    basher install tests-always-included/mo   # moustache templates in bash
+    ( basher install sstephenson/bats )          # tests in bash
+    ( basher install jimeh/stub.sh )             # stub bash
+    ( basher install freakhill/scripts )         # my script
+    ( basher install fidian/ansi )               # colors and window title
+    ( basher install clvv/fasd )                 # File Any Search Dir
+    ( basher install junegunn/fzf )              # fuzzy file finder
+    ( basher install paoloantinori/hhighlighter )# highlights
+    ( basher install shyiko/commacd )            # ,(forward) ,,(back) ,,,(both)
+    ( basher install tests-always-included/mo )  # moustache templates in bash
 
     info "running fzf install script"
     $HOME/.basher/cellar/packages/junegunn/fzf/install
