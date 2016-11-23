@@ -3,7 +3,7 @@ post_install() {
     git clone https://github.com/basherpm/basher.git ~/.basher
     export PATH="$HOME/.basher/bin:$PATH"
     eval "$(basher init -)"
-    basher update
+#    basher update
 
 #    info "installing usual packages"
 #    basher install sstephenson/bats           # tests in bash
