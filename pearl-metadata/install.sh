@@ -51,7 +51,7 @@ pre_update() {
 
 post_update() {
     info "updating basher stuff"
-    basher update
+    ( basher update )
     for p in `basher outdated`
     do
         basher upgrade $p
