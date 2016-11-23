@@ -1,10 +1,10 @@
 post_install() {
     info "installing basher, because basher links bins and mans etc. nicely"
-#    git clone https://github.com/basherpm/basher.git ~/.basher
-#    export PATH="$HOME/.basher/bin:$PATH"
-#    eval "$(basher init -)"
-#    basher update
-#
+    git clone https://github.com/basherpm/basher.git ~/.basher
+    export PATH="$HOME/.basher/bin:$PATH"
+    eval "$(basher init -)"
+    basher update
+
 #    info "installing usual packages"
 #    basher install sstephenson/bats           # tests in bash
 #    basher install jimeh/stub.sh              # stub bash
