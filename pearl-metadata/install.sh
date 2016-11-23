@@ -43,6 +43,12 @@ post_install() {
     cat <<EOF > ~/.bash_profile
 [ -f ~/.bashrc ] && source ~/.bashrc
 EOF
+
+    info "install lein"
+    pushd ~/.local/bin
+    curl -fsSL https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > lein
+    chmod +x lein
+    ./lein
 }
 
 pre_update() {
