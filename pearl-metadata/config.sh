@@ -29,4 +29,4 @@ export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file s
 
 alias ll='ls -lG'
 
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.basher/bin:$GOPATH/bin
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.guix-profile/bin:$HOME/.basher/bin:$GOPATH/bin
