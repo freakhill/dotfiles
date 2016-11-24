@@ -1,58 +1,82 @@
 post_install() {
-    info "installing basher, because basher links bins and mans etc. nicely"
-    git clone https://github.com/basherpm/basher.git ~/.basher
-    export PATH="$HOME/.basher/bin:$PATH"
-    eval "$(basher init -)"
-    basher update
+    # basher breaks stuff...
+cat <<EOF | bash -s
+        echo "installing basher, because basher links bins and mans etc. nicely"
+        git clone https://github.com/basherpm/basher.git ~/.basher
+        export PATH="$HOME/.basher/bin:$PATH"
+        eval "$(basher init -)"
+        basher update # in a subshell to capture some kind of latent exit
 
-    info "installing usual packages"
-    basher install sstephenson/bats           # tests in bash
-    basher install jimeh/stub.sh              # stub bash
-    basher install freakhill/scripts          # my script
-    basher install fidian/ansi                # colors and window title
-    basher install clvv/fasd                  # File Any Search Dir
-    basher install junegunn/fzf               # fuzzy file finder
-    basher install paoloantinori/hhighlighter # highlights
-    basher install shyiko/commacd             # ,(forward) ,,(back) ,,,(both)
-    basher install tests-always-included/mo   # moustache templates in bash
+        echo "installing usual packages"
+        basher install sstephenson/bats           # tests in bash
+        basher install jimeh/stub.sh              # stub bash
+        basher install freakhill/scripts          # my script
+        basher install fidian/ansi                # colors and window title
+        basher install clvv/fasd                  # File Any Search Dir
+        basher install junegunn/fzf               # fuzzy file finder
+        basher install paoloantinori/hhighlighter # highlights
+        basher install shyiko/commacd             # ,(forward) ,,(back) ,,,(both)
+        basher install tests-always-included/mo   # moustache templates in bash
 
-    info "running fzf install script"
-    $HOME/.basher/cellar/packages/junegunn/fzf/install
+        echo "running fzf install script"
+        ( $HOME/.basher/cellar/packages/junegunn/fzf/install )
 
-    info "make sur that our homemade ssh/scp scripts run fine"
-    mkdir -p $HOME/.ssh/config.0
-    touch $HOME/.ssh/config
-    chmod 700 $HOME/.ssh
-    chmod 600 $HOME/config
+        echo "make sur that our homemade ssh/scp scripts run fine"
+        mkdir -p $HOME/.ssh/config.0
+        mkdir -p $HOME/.ssh/backups
+        touch $HOME/.ssh/config.0/empty
+        touch $HOME/.ssh/settings
+        touch $HOME/.ssh/config
+        chmod 600 $HOME/.ssh/config
 
-    info "create the golang go folder"
-    mkdir -p $HOME/go
+        [ "$(ls -A $HOME/.ssh/config.0)" ] && echo "config.0 not empty" \
+                || cp $HOME/.ssh/config $HOME/.ssh/config.0/oldconfig
 
-    info "link tmux and git config"
-    link tmux "$PEARL_PKGDIR/tmux.conf"
-    link git  "$PEARL_PKGDIR/gitconfig"
+        echo "create the golang go folder"
+        mkdir -p $HOME/go
+
+        echo "link tmux and git config"
+        rm -f $HOME/.tmux.conf
+        rm -f $HOME/.gitconfig
+        ln -s "$PEARL_PKGDIR/tmux.conf" $HOME/.tmux.conf
+        ln -s "$PEARL_PKGDIR/gitconfig" $HOME/.gitconfig
+
+        echo "adding bashrc source to bash_profile for ssh"
+        cat <<EOF2 > ~/.bash_profile
+[ -f ~/.bashrc ] && source ~/.bashrc
+EOF2
+
+        echo "install lein"
+        pushd ~/.local/bin
+        curl -fsSL https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > lein
+        chmod +x lein
+        ./lein
+EOF
 }
 
 pre_update() {
-    echo "nothing yet in pre-update..."
+    echo "NYI"
 }
 
 post_update() {
-    info "updating basher stuff"
-    basher update
-    for p in `basher outdated`
-    do
-        basher upgrade $p
-    done
+    # basher breaks stuff
+    cat <<EOF | bash -s
+        echo "NYI"
+        basher update
+        for p in `basher outdated`
+        do
+            basher upgrade $p
+        done
+EOF
 }
 
 pre_remove() {
     unlink tmux "$PEARL_PKGDIR/tmux.conf"
     unlink git  "$PEARL_PKGDIR/gitconfig"
-    info "removing basher"
+    echo "removing basher"
     rm -fr ~/.basher
 }
 
 post_remove() {
-    echo "nothing yet in post-remove..."
+    echo "NYI"
 }
