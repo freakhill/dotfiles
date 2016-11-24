@@ -1,5 +1,5 @@
-export PATH=$PATH:$HOME/.local/bin:$HOME/.basher/bin:$GOPATH/bin
 export GOPATH=$HOME/go
+export PATH=$PATH:$HOME/.local/bin:$HOME/.guix-profile/bin:$HOME/.basher/bin:$GOPATH/bin
 
 eval "$(basher init -)"
 eval "$(thefuck --alias)"
@@ -46,4 +46,3 @@ export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file s
 alias ll='ls -lG --color'
 alias lla='ll -a'
 
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.guix-profile/bin:$HOME/.basher/bin:$GOPATH/bin

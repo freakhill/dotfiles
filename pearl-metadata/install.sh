@@ -59,7 +59,7 @@ pre_update() {
 }
 
 post_update() {
-    # basher breaks stuff
+    # basher breaks stuff...
     cat <<EOF | bash -s
         echo "NYI"
         basher update
