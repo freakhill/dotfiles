@@ -1,4 +1,7 @@
 post_install() {
+    mkdir -p ~/.local/var/log
+    mkdir -p ~/.local/etc
+    mkdir -p ~/.local/run
     # basher breaks stuff...
 cat <<EOF | bash -s
         echo "installing basher, because basher links bins and mans etc. nicely"

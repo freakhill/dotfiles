@@ -1,5 +1,5 @@
 export GOPATH=$HOME/go
-export PATH=$PATH:$HOME/.local/bin:$HOME/.guix-profile/bin:$HOME/.basher/bin:$GOPATH/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/.guix-profile/sbin:$HOME/.guix-profile/bin:$HOME/.basher/bin:$GOPATH/bin
 
 eval "$(basher init -)"
 eval "$(thefuck --alias)"
@@ -44,5 +44,6 @@ export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file s
 [[ $- = *i* ]] && bind '"\C-r": "\C-a hh \C-j"'
 
 alias ll='ls -lG --color'
+#alias ll='ls -alF'
+#alias la='ls -A'
 alias lla='ll -a'
-
