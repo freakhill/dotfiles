@@ -1,5 +1,4 @@
 post_install() {
-    # basher breaks stuff...
 cat <<EOF | bash -s
         echo "installing basher, because basher links bins and mans etc. nicely"
         git clone https://github.com/basherpm/basher.git ~/.basher
@@ -59,7 +58,6 @@ pre_update() {
 }
 
 post_update() {
-    # basher breaks stuff
     cat <<EOF | bash -s
         echo "NYI"
         basher update
