@@ -1,18 +1,16 @@
-export GOPATH=$HOME/go
-export PATH=$PATH:$HOME/.local/bin:$HOME/.guix-profile/sbin:$HOME/.guix-profile/bin:$HOME/.basher/bin:$GOPATH/bin
+export GOPATH=$HOME/.go
+export PATH=$PATH:$HOME/.local/bin:$HOME/.guix-profile/sbin:$HOME/.guix-profile/bin:$GOPATH/bin
 
-eval "$(basher init -)"
 eval "$(thefuck --alias)"
 eval "$(fasd --init auto)"
 
-[[ $- = *i* ]] && source $HOME/.basher/cellar/packages/freakhill/scripts/lib/ssh_completion
-[[ $- = *i* ]] && source $HOME/.basher/cellar/packages/freakhill/scripts/lib/git_completion
-[[ $- = *i* ]] && source $HOME/.basher/cellar/packages/paoloantinori/hhighlighter/h.sh
-[[ $- = *i* ]] && source $HOME/.basher/cellar/packages/shyiko/commacd/commacd.bash
-[[ $- = *i* ]] && source $HOME/.basher/cellar/packages/tests-always-included/mo/mo
-[[ $- = *i* ]] && source $HOME/.basher/cellar/packages/jimeh/stub.sh/stub.sh
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[[ $- = *i* ]] && source $PEARL_PKGVARDIR/freakhill/scripts/lib/ssh_completion
+[[ $- = *i* ]] && source $PEARL_PKGVARDIR/freakhill/scripts/lib/git_completion
+[[ $- = *i* ]] && source $PEARL_PKGVARDIR/paoloantinori/hhighlighter/h.sh
+[[ $- = *i* ]] && source $PEARL_PKGVARDIR/shyiko/commacd/commacd.bash
+[[ $- = *i* ]] && source $PEARL_PKGVARDIR/tests-always-included/mo/mo
+[[ $- = *i* ]] && source $PEARL_PKGVARDIR/jimeh/stub.sh/stub.sh
+[[ $- = *i* ]] && [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # link bash history from dropbox
 if ! [ -f ~/.dropbox_linked ]
