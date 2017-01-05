@@ -6,10 +6,8 @@ idem_installs() {
 }
 
 post_install() {
+    mkdir -p ~/.local/{bin,etc,run,lib,share,var}
     mkdir -p ~/.local/var/log
-    mkdir -p ~/.local/etc
-    mkdir -p ~/.local/run
-    # basher breaks stuff...
 cat <<EOF | bash -s
         echo "installing basher, because basher links bins and mans etc. nicely"
         git clone https://github.com/basherpm/basher.git ~/.basher
