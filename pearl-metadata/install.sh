@@ -1,3 +1,10 @@
+idem_installs() {
+    echo "idempotent installs"
+    cargo install racer
+    cargo install parallel
+    # guix package -i pkgname
+}
+
 post_install() {
     mkdir -p ~/.local/var/log
     mkdir -p ~/.local/etc
@@ -55,31 +62,26 @@ EOF2
         chmod +x lein
         ./lein
 EOF
+    idem_install
 }
 
 pre_update() {
-    echo "NYI"
+    echo "pre update"
 }
 
 post_update() {
+    echo "post update"
     # basher breaks stuff...
     cat <<EOF | bash -s
-        echo "NYI"
         basher update
         for p in `basher outdated`
         do
             basher upgrade $p
         done
 EOF
+    idem_install
 }
 
 pre_remove() {
-    unlink tmux "$PEARL_PKGDIR/tmux.conf"
-    unlink git  "$PEARL_PKGDIR/gitconfig"
-    echo "removing basher"
-    rm -fr ~/.basher
-}
-
-post_remove() {
-    echo "NYI"
+    echo "remove not supported - rebuild an image without it"
 }
