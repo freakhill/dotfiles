@@ -2,7 +2,18 @@ idem_installs() {
     echo "idempotent installs"
     cargo install racer
     cargo install parallel
-    # guix package -i pkgname
+    ############################################################################
+    ### guix node package is broken so we install with stow
+    #guix package -i node
+    mkdir -p $HOME/.stow
+    pushd $HOME/.stow
+    wget https://nodejs.org/dist/v6.9.3/node-v6.9.3-linux-x64.tar.xz
+    tar xf node-v6.9.3-linux-x64.tar.xz
+    rm node-v6.9.3-linux-x64.tar.xz
+    stow -d $HOME/.stow -t $HOME/.local node-v6.9.3-linux-x64
+    popd
+    ############################################################################
+    npm install -g tldr
 }
 
 post_install() {
