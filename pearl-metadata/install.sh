@@ -22,7 +22,8 @@ idem_install() {
     ! type -a rg && cargo install ripgrep
     ############################################################################
     info "installing guix packages"
-    guix package -i go ruby
+    ! type -a go && guix package -i go
+    ! type -a ruby && guix package -i ruby
     ### guix node package is broken so we install with stow
     #guix package -i node
     info "installing nodejs"
@@ -33,13 +34,13 @@ idem_install() {
         wget https://nodejs.org/dist/v6.9.3/node-v6.9.3-linux-x64.tar.xz
         tar xf node-v6.9.3-linux-x64.tar.xz
         rm node-v6.9.3-linux-x64.tar.xz
-        stow -d $PEARL_PKGVARDIR -t $HOME/.local node-v6.9.3-linux-x64
+        stow -d $PEARL_PKGVARDIR -t $HOME/.local --restow node-v6.9.3-linux-x64
         popd
     fi
     ############################################################################
     info "installing npm packages"
     ! type -a tldr && npm install -g tldr
-    stow -d $PEARL_PKGVARDIR -t $HOME/.local node-v6.9.3-linux-x64
+    stow -d $PEARL_PKGVARDIR -t $HOME/.local --restow node-v6.9.3-linux-x64
     ############################################################################
     info "installing rq"
     pushd $HOME/.local/bin
