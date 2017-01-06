@@ -11,7 +11,7 @@ PACKAGES_FROM_GITHUB[7]="shyiko/commacd"             # ,(forward) ,,(back) ,,,(b
 PACKAGES_FROM_GITHUB[8]="tests-always-included/mo"   # moustache templates in bash
 
 idem_install() {
-    echo "idempotent install"
+    info "idempotent install"
     ############################################################################
     ## PEARL installs
     try pearl install liquidprompt ls-colors
@@ -35,7 +35,7 @@ idem_install() {
     fi
     ############################################################################
     ## NPM installs
-    npm install -g tldr
+    ! type -a tldr && npm install -g tldr
     stow -d $PEARL_PKGVARDIR -t $HOME/.local node-v6.9.3-linux-x64
     ############################################################################
     ## Hand installs
@@ -49,7 +49,8 @@ idem_install() {
 }
 
 install_from_github() {
-    local dir="$PEARL_PKGVARDIR/$1"
+    local dir="${PEARL_PKGVARDIR}/$1"
+    info "INSTALL FROM GITHUB :: $dir :: $1"
     mkdir -p "$dir/.."
     pushd "$dir/.."
     git clone https://github.com/$1
@@ -58,7 +59,8 @@ install_from_github() {
 }
 
 update_from_github() {
-    local dir="$PEARL_PKGVARDIR/$1"
+    local dir="${PEARL_PKGVARDIR}/$1"
+    info "UPDATE FROM GITHUB :: $dir :: $1"
     pushd "$dir"
     git pull
     stow -d "$dir/.." -t $HOME/.local $(echo "$1" | cut -f2 -d'/')
@@ -75,10 +77,10 @@ post_install() {
         install_from_github $pkg
     done
 
-    echo "running fzf install script"
+    info "running fzf install script"
     ( $PEARL_PKGVARDIR/junegunn/fzf/install )
 
-    echo "make sur that our homemade ssh/scp scripts run fine"
+    info "make sur that our homemade ssh/scp scripts run fine"
     mkdir -p $HOME/.ssh/config.0
     mkdir -p $HOME/.ssh/backups
     touch $HOME/.ssh/config.0/empty
@@ -86,19 +88,19 @@ post_install() {
     touch $HOME/.ssh/config
     chmod 600 $HOME/.ssh/config
 
-    [ "$(ls -A $HOME/.ssh/config.0)" ] && echo "config.0 not empty" \
+    [ "$(ls -A $HOME/.ssh/config.0)" ] && info "config.0 not empty" \
             || cp $HOME/.ssh/config $HOME/.ssh/config.0/oldconfig
 
-    echo "link tmux and git config"
+    info "link tmux and git config"
     rm -f $HOME/.tmux.conf
     rm -f $HOME/.gitconfig
     ln -s "$PEARL_PKGDIR/tmux.conf" $HOME/.tmux.conf
     ln -s "$PEARL_PKGDIR/gitconfig" $HOME/.gitconfig
 
-    echo "adding bashrc source to bash_profile for ssh"
+    info "adding bashrc source to bash_profile for ssh"
     printf "\n[ -f ~/.bashrc ] && source ~/.bashrc\n" >> ~/.bash_profile
 
-    echo "install lein"
+    info "install lein"
     pushd ~/.local/bin
     curl -fsSL https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > lein
     chmod +x lein
@@ -107,11 +109,11 @@ post_install() {
 }
 
 pre_update() {
-    echo "pre update"
+    info "pre update"
 }
 
 post_update() {
-    echo "post update"
+    info "post update"
     for pkg in ${PACKAGES_FROM_GITHUB[@]}
     do
         install_from_github $pkg
@@ -121,5 +123,5 @@ post_update() {
 }
 
 pre_remove() {
-    echo "remove not supported - rebuild an image without it"
+    info "remove not supported - rebuild an image without it"
 }
