@@ -79,7 +79,7 @@ install_from_github() {
         mkdir -p "$dir/.."
         pushd "$dir/.."
         git clone https://github.com/$1
-        stow -d "$dir/.." -t $HOME/.local $(echo "$1" | cut -f2 -d'/')
+        stow -d "$dir/.." -t $HOME/.local --ignore '^[^/]*' $(echo "$1" | cut -f2 -d'/')
         popd
     else
         info "skipping install from github $1"
