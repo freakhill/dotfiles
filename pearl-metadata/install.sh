@@ -14,26 +14,25 @@ idem_install() {
     echo "idempotent install"
     ############################################################################
     ## PEARL installs
-    try pearl install liquidprompt
-    try pearl install ls-colors
+    try pearl install liquidprompt ls-colors
     ############################################################################
     ## CARGO installs
-    cargo install racer
-    cargo install parallel
-    cargo install ripgrep
+    cargo install racer parallel ripgrep
     ############################################################################
     ## GUIX installs
-    guix package -i go
-    guix package -i ruby
+    guix package -i go ruby
     ### guix node package is broken so we install with stow
     #guix package -i node
-    mkdir -p $HOME/.stow
-    pushd $PEARL_PKGVARDIR
-    wget https://nodejs.org/dist/v6.9.3/node-v6.9.3-linux-x64.tar.xz
-    tar xf node-v6.9.3-linux-x64.tar.xz
-    rm node-v6.9.3-linux-x64.tar.xz
-    stow -d $PEARL_PKGVARDIR -t $HOME/.local node-v6.9.3-linux-x64
-    popd
+    if ! type -a npm
+    then
+        mkdir -p $HOME/.stow
+        pushd $PEARL_PKGVARDIR
+        wget https://nodejs.org/dist/v6.9.3/node-v6.9.3-linux-x64.tar.xz
+        tar xf node-v6.9.3-linux-x64.tar.xz
+        rm node-v6.9.3-linux-x64.tar.xz
+        stow -d $PEARL_PKGVARDIR -t $HOME/.local node-v6.9.3-linux-x64
+        popd
+    fi
     ############################################################################
     ## NPM installs
     npm install -g tldr
@@ -41,8 +40,11 @@ idem_install() {
     ############################################################################
     ## Hand installs
     pushd $HOME/.local/bin
-    curl -fsSLo rq https://s3-eu-west-1.amazonaws.com/record-query/record-query/x86_64-unknown-linux-musl/rq
-    chmod +x rq
+    if ! type -a rq
+    then
+        curl -fsSLo rq https://s3-eu-west-1.amazonaws.com/record-query/record-query/x86_64-unknown-linux-musl/rq
+        chmod +x rq
+    fi
     popd
 }
 
