@@ -10,6 +10,10 @@ PACKAGES_FROM_GITHUB[6]="paoloantinori/hhighlighter" # highlights
 PACKAGES_FROM_GITHUB[7]="shyiko/commacd"             # ,(forward) ,,(back) ,,,(both)
 PACKAGES_FROM_GITHUB[8]="tests-always-included/mo"   # moustache templates in bash
 
+restow() {
+        stow -d $PEARL_PKGVARDIR -t $HOME/.local --restow $1
+}
+
 idem_install() {
     info "idempotent install"
     ############################################################################
@@ -34,13 +38,16 @@ idem_install() {
         wget https://nodejs.org/dist/v6.9.3/node-v6.9.3-linux-x64.tar.xz
         tar xf node-v6.9.3-linux-x64.tar.xz
         rm node-v6.9.3-linux-x64.tar.xz
-        stow -d $PEARL_PKGVARDIR -t $HOME/.local --restow node-v6.9.3-linux-x64
+        restow node-v6.9.3-linux-x64
         popd
     fi
+    restow_node() {
+        restow node-v6.9.3-linux-x64
+    }
     ############################################################################
     info "installing npm packages"
     ! type -a tldr && npm install -g tldr
-    stow -d $PEARL_PKGVARDIR -t $HOME/.local --restow node-v6.9.3-linux-x64
+    restow_node
     ############################################################################
     info "installing rq"
     pushd $HOME/.local/bin
