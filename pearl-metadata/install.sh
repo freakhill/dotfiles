@@ -91,7 +91,6 @@ update_from_github() {
     info "updating from github $1"
     pushd "$dir"
     git pull
-    info "DIR IS $dir"
     stow -d "$dir/.." -t $HOME/.local -R --ignore '^[^/]*' $(echo "$1" | cut -f2 -d'/')
     popd
 }
@@ -142,7 +141,7 @@ post_update() {
         install_from_github $pkg
         update_from_github $pkg
     done
-    #idem_install
+    idem_install
 }
 
 pre_remove() {
