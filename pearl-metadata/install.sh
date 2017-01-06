@@ -17,7 +17,9 @@ idem_install() {
     try pearl install liquidprompt ls-colors
     ############################################################################
     ## CARGO installs
-    cargo install --list racer parallel ripgrep
+    cargo install racer
+    cargo install parallel
+    cargo install ripgrep
     ############################################################################
     ## GUIX installs
     guix package -i go ruby
