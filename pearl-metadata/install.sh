@@ -13,18 +13,19 @@ PACKAGES_FROM_GITHUB[8]="tests-always-included/mo"   # moustache templates in ba
 idem_install() {
     info "idempotent install"
     ############################################################################
-    ## PEARL installs
+    info "installing pearl packages"
     try pearl install liquidprompt ls-colors
     ############################################################################
-    ## CARGO installs
+    info "installing cargo packages"
     cargo install racer
     cargo install parallel
     cargo install ripgrep
     ############################################################################
-    ## GUIX installs
+    info "installing guix packages"
     guix package -i go ruby
     ### guix node package is broken so we install with stow
     #guix package -i node
+    info "installing nodejs"
     if ! type -a npm
     then
         mkdir -p $HOME/.stow
@@ -36,11 +37,11 @@ idem_install() {
         popd
     fi
     ############################################################################
-    ## NPM installs
+    info "installing npm packages"
     ! type -a tldr && npm install -g tldr
     stow -d $PEARL_PKGVARDIR -t $HOME/.local node-v6.9.3-linux-x64
     ############################################################################
-    ## Hand installs
+    info "installing rq"
     pushd $HOME/.local/bin
     if ! type -a rq
     then
