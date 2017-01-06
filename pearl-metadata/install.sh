@@ -10,8 +10,8 @@ PACKAGES_FROM_GITHUB[6]="paoloantinori/hhighlighter" # highlights
 PACKAGES_FROM_GITHUB[7]="shyiko/commacd"             # ,(forward) ,,(back) ,,,(both)
 PACKAGES_FROM_GITHUB[8]="tests-always-included/mo"   # moustache templates in bash
 
-idem_installs() {
-    echo "idempotent installs"
+idem_install() {
+    echo "idempotent install"
     ############################################################################
     ## PEARL installs
     pearl install liquidprompt
