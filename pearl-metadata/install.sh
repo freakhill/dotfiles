@@ -48,7 +48,16 @@ idem_install() {
         curl -fsSLo rq https://s3-eu-west-1.amazonaws.com/record-query/record-query/x86_64-unknown-linux-musl/rq
         chmod +x rq
     fi
-    popd
+    ############################################################################
+    info "installing lein"
+    if ! type -a lein
+    then
+        pushd ~/.local/bin
+        curl -fsSL https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > lein
+        chmod +x lein
+        ./lein
+        popd
+    fi
 }
 
 install_from_github() {
@@ -103,11 +112,6 @@ post_install() {
     info "adding bashrc source to bash_profile for ssh"
     printf "\n[ -f ~/.bashrc ] && source ~/.bashrc\n" >> ~/.bash_profile
 
-    info "install lein"
-    pushd ~/.local/bin
-    curl -fsSL https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > lein
-    chmod +x lein
-    ./lein
     idem_install
 }
 
@@ -126,5 +130,5 @@ post_update() {
 }
 
 pre_remove() {
-    info "remove not supported - rebuild an image without it"
+    warn "remove not supported - rebuild an image without it"
 }
