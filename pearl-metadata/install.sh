@@ -17,9 +17,9 @@ idem_install() {
     try pearl install liquidprompt ls-colors
     ############################################################################
     info "installing cargo packages"
-    cargo install racer
-    cargo install parallel
-    cargo install ripgrep
+    ! type -a racer && cargo install racer
+    ! type -a parallel && cargo install parallel
+    ! type -a rg && cargo install ripgrep
     ############################################################################
     info "installing guix packages"
     guix package -i go ruby
@@ -121,6 +121,7 @@ pre_update() {
 
 post_update() {
     info "post update"
+    info "PACKAGES FROM GITHUB = ${PACKAGES_FROM_GITHUB[@]}"
     for pkg in ${PACKAGES_FROM_GITHUB[@]}
     do
         install_from_github $pkg
