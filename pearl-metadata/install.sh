@@ -91,6 +91,7 @@ update_from_github() {
     info "updating from github $1"
     pushd "$dir"
     git pull
+    info "DIR IS $dir"
     stow -d "$dir/.." -t $HOME/.local -R $(echo "$1" | cut -f2 -d'/')
     popd
 }
