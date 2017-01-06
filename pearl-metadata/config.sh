@@ -6,6 +6,7 @@ eval "$(fasd --init auto)"
 
 [[ $- = *i* ]] && source $PEARL_PKGVARDIR/freakhill/scripts/lib/ssh_completion
 [[ $- = *i* ]] && source $PEARL_PKGVARDIR/freakhill/scripts/lib/git_completion
+[[ $- = *i* ]] && source $PEARL_PKGVARDIR/freakhill/scripts/lib/srsh_completion
 [[ $- = *i* ]] && source $PEARL_PKGVARDIR/paoloantinori/hhighlighter/h.sh
 [[ $- = *i* ]] && source $PEARL_PKGVARDIR/shyiko/commacd/commacd.bash
 [[ $- = *i* ]] && source $PEARL_PKGVARDIR/tests-always-included/mo/mo
