@@ -92,7 +92,7 @@ update_from_github() {
     pushd "$dir"
     git pull
     info "DIR IS $dir"
-    stow -d "$dir/.." -t $HOME/.local -R --ignore '^\./[^/]*' $(echo "$1" | cut -f2 -d'/')
+    stow -d "$dir/.." -t $HOME/.local -R --ignore '^[^/]*' $(echo "$1" | cut -f2 -d'/')
     popd
 }
 
