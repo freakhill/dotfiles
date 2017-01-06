@@ -46,8 +46,7 @@ idem_install() {
     }
     ############################################################################
     info "installing npm packages"
-    ! type -a tldr && npm install -g tldr
-    restow_node
+    ! type -a tldr && npm install -g tldr && restow_node
     ############################################################################
     info "installing rq"
     pushd $HOME/.local/bin
@@ -135,7 +134,7 @@ post_update() {
         install_from_github $pkg
         update_from_github $pkg
     done
-    idem_install
+    #idem_install
 }
 
 pre_remove() {
