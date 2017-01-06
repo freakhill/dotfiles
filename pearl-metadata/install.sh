@@ -2,7 +2,7 @@ packages_from_github() {
     declare -a PACKAGES_FROM_GITHUB
 
     PACKAGES_FROM_GITHUB[0]="sstephenson/bats"           # tests in bash
-    #PACKAGES_FROM_GITHUB[1]="jimeh/stub.sh"              # stub bash
+    PACKAGES_FROM_GITHUB[1]="jimeh/stub.sh"              # stub bash
     PACKAGES_FROM_GITHUB[2]="freakhill/scripts"          # my script
     PACKAGES_FROM_GITHUB[3]="fidian/ansi"                # colors and window title
     PACKAGES_FROM_GITHUB[4]="clvv/fasd"                  # File Any Search Dir
@@ -92,7 +92,7 @@ update_from_github() {
     pushd "$dir"
     git pull
     info "DIR IS $dir"
-    stow -d "$dir/.." -t $HOME/.local -R $(echo "$1" | cut -f2 -d'/')
+    stow -d "$dir/.." -t $HOME/.local -R --ignore '^\./[^/]*' $(echo "$1" | cut -f2 -d'/')
     popd
 }
 
