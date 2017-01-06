@@ -1,14 +1,18 @@
-declare -a PACKAGES_FROM_GITHUB
+packages_from_github() {
+    declare -a PACKAGES_FROM_GITHUB
 
-PACKAGES_FROM_GITHUB[0]="sstephenson/bats"           # tests in bash
-PACKAGES_FROM_GITHUB[1]="jimeh/stub.sh"              # stub bash
-PACKAGES_FROM_GITHUB[2]="freakhill/scripts"          # my script
-PACKAGES_FROM_GITHUB[3]="fidian/ansi"                # colors and window title
-PACKAGES_FROM_GITHUB[4]="clvv/fasd"                  # File Any Search Dir
-PACKAGES_FROM_GITHUB[5]="junegunn/fzf"               # fuzzy file finder
-PACKAGES_FROM_GITHUB[6]="paoloantinori/hhighlighter" # highlights
-PACKAGES_FROM_GITHUB[7]="shyiko/commacd"             # ,(forward) ,,(back) ,,,(both)
-PACKAGES_FROM_GITHUB[8]="tests-always-included/mo"   # moustache templates in bash
+    PACKAGES_FROM_GITHUB[0]="sstephenson/bats"           # tests in bash
+    PACKAGES_FROM_GITHUB[1]="jimeh/stub.sh"              # stub bash
+    PACKAGES_FROM_GITHUB[2]="freakhill/scripts"          # my script
+    PACKAGES_FROM_GITHUB[3]="fidian/ansi"                # colors and window title
+    PACKAGES_FROM_GITHUB[4]="clvv/fasd"                  # File Any Search Dir
+    PACKAGES_FROM_GITHUB[5]="junegunn/fzf"               # fuzzy file finder
+    PACKAGES_FROM_GITHUB[6]="paoloantinori/hhighlighter" # highlights
+    PACKAGES_FROM_GITHUB[7]="shyiko/commacd"             # ,(forward) ,,(back) ,,,(both)
+    PACKAGES_FROM_GITHUB[8]="tests-always-included/mo"   # moustache templates in bash
+
+    echo ${PACKAGES_FROM_GITHUB[@]}
+}
 
 restow() {
         stow -d $PEARL_PKGVARDIR -t $HOME/.local --restow $1
@@ -87,11 +91,10 @@ update_from_github() {
 }
 
 post_install() {
-    mkdir -p $HOME/.local/{bin,etc,run,lib,share,var}
-    mkdir -p $HOME/.local/var/log
+    mkdir -p $HOME/.local/{bin,etc,run,lib,share,var/log}
     mkdir -p $HOME/.go
 
-    for pkg in ${PACKAGES_FROM_GITHUB[@]}
+    for pkg in `packages_from_github`
     do
         install_from_github $pkg
     done
@@ -128,8 +131,7 @@ pre_update() {
 
 post_update() {
     info "post update"
-    info "PACKAGES FROM GITHUB = ${PACKAGES_FROM_GITHUB[@]}"
-    for pkg in ${PACKAGES_FROM_GITHUB[@]}
+    for pkg in `packages_from_github`
     do
         install_from_github $pkg
         update_from_github $pkg
