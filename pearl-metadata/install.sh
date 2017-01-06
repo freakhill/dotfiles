@@ -14,8 +14,8 @@ idem_install() {
     echo "idempotent install"
     ############################################################################
     ## PEARL installs
-    pearl install liquidprompt
-    pearl install ls-colors
+    pearl install liquidprompt || true
+    pearl install ls-colors || true
     ############################################################################
     ## CARGO installs
     cargo install racer
