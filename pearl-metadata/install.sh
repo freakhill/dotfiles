@@ -15,7 +15,7 @@ packages_from_github() {
 }
 
 restow() {
-        stow -d $PEARL_PKGVARDIR -t $HOME/.local --restow $1
+        stow -d $PEARL_PKGVARDIR -t $HOME/.local -R $1
 }
 
 idem_install() {
@@ -73,20 +73,25 @@ idem_install() {
 
 install_from_github() {
     local dir="${PEARL_PKGVARDIR}/$1"
-    info "INSTALL FROM GITHUB :: $dir :: $1"
-    mkdir -p "$dir/.."
-    pushd "$dir/.."
-    git clone https://github.com/$1
-    stow -d "$dir/.." -t $HOME/.local $(echo "$1" | cut -f2 -d'/')
-    popd
+    if ! [ -d "$dir" ]
+    then
+        info "installing from github $1"
+        mkdir -p "$dir/.."
+        pushd "$dir/.."
+        git clone https://github.com/$1
+        stow -d "$dir/.." -t $HOME/.local $(echo "$1" | cut -f2 -d'/')
+        popd
+    else
+        info "skipping install from github $1"
+    fi
 }
 
 update_from_github() {
     local dir="${PEARL_PKGVARDIR}/$1"
-    info "UPDATE FROM GITHUB :: $dir :: $1"
+    info "updating from github $1"
     pushd "$dir"
     git pull
-    stow -d "$dir/.." -t $HOME/.local $(echo "$1" | cut -f2 -d'/')
+    stow -d "$dir/.." -t $HOME/.local -R $(echo "$1" | cut -f2 -d'/')
     popd
 }
 
