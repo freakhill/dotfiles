@@ -1,7 +1,6 @@
 export GOPATH=$HOME/.go
 export PATH=$PATH:$HOME/.local/bin:$HOME/.guix-profile/sbin:$HOME/.guix-profile/bin:$GOPATH/bin
 
-eval "$(thefuck --alias)"
 eval "$(fasd --init auto)"
 
 [[ $- = *i* ]] && source $PEARL_PKGVARDIR/freakhill/scripts/lib/ssh_completion
