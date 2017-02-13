@@ -2,14 +2,13 @@ packages_from_github() {
     declare -a PACKAGES_FROM_GITHUB
 
     PACKAGES_FROM_GITHUB[0]="sstephenson/bats"           # tests in bash
-    #PACKAGES_FROM_GITHUB[1]="jimeh/stub.sh"              # stub bash
-    PACKAGES_FROM_GITHUB[2]="freakhill/scripts"          # my script
-    PACKAGES_FROM_GITHUB[3]="fidian/ansi"                # colors and window title
-    PACKAGES_FROM_GITHUB[4]="clvv/fasd"                  # File Any Search Dir
-    PACKAGES_FROM_GITHUB[5]="junegunn/fzf"               # fuzzy file finder
-    PACKAGES_FROM_GITHUB[6]="paoloantinori/hhighlighter" # highlights
-    PACKAGES_FROM_GITHUB[7]="shyiko/commacd"             # ,(forward) ,,(back) ,,,(both)
-    PACKAGES_FROM_GITHUB[8]="tests-always-included/mo"   # moustache templates in bash
+    PACKAGES_FROM_GITHUB[1]="freakhill/scripts"          # my script
+    PACKAGES_FROM_GITHUB[2]="fidian/ansi"                # colors and window title
+    PACKAGES_FROM_GITHUB[3]="clvv/fasd"                  # File Any Search Dir
+    PACKAGES_FROM_GITHUB[4]="junegunn/fzf"               # fuzzy file finder
+    PACKAGES_FROM_GITHUB[5]="paoloantinori/hhighlighter" # highlights
+    PACKAGES_FROM_GITHUB[6]="shyiko/commacd"             # ,(forward) ,,(back) ,,,(both)
+    PACKAGES_FROM_GITHUB[7]="tests-always-included/mo"   # moustache templates in bash
 
     echo ${PACKAGES_FROM_GITHUB[@]}
 }
