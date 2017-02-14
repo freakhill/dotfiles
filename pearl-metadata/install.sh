@@ -79,7 +79,7 @@ install_from_github() {
         pushd "$dir/.."
         git clone https://github.com/$1
         info "stowing links from $dir/.. :: $(echo $1 | cut -f2 -d'/')"
-        stow -d "$dir/.." -t $HOME/.local $(echo "$1" | cut -f2 -d'/')
+        try stow -d "$dir/.." -t $HOME/.local $(echo "$1" | cut -f2 -d'/')
         popd
     else
         info "skipping install from github $1"
@@ -91,7 +91,7 @@ update_from_github() {
     info "updating from github $1"
     pushd "$dir"
     git pull
-    stow -d "$dir/.." -t $HOME/.local -R $(echo "$1" | cut -f2 -d'/')
+    try stow -d "$dir/.." -t $HOME/.local -R $(echo "$1" | cut -f2 -d'/')
     popd
 }
 
