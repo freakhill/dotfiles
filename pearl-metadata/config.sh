@@ -1,5 +1,6 @@
-export GOPATH=$HOME/.go
-export PATH=$PATH:$HOME/.local/bin:$HOME/.guix-profile/sbin:$HOME/.guix-profile/bin:$GOPATH/bin
+export GOPATH="$HOME/.go"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.guix-profile/sbin:$HOME/.guix-profile/bin:$GOPATH/bin"
+export LD_LIBRARY_PATH="$HOME/.guix-profile/lib${LD_LIBRARY_PATH:+:}$LD_LIBRARY_PATH"
 
 eval "$(fasd --init auto)"
 
@@ -37,4 +38,3 @@ export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file s
 
 alias ll='ls -lG --color'
 alias lla='ll -a'
-
