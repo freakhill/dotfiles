@@ -31,6 +31,7 @@ idem_install() {
     info "installing guix packages"
     ! type -a go && guix package -i go
     ! type -a ruby && guix package -i ruby
+    ! type -a jq && guix package -i jq
     ### guix node package is broken so we install with stow
     #guix package -i node
     info "installing nodejs"
