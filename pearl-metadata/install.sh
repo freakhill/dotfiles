@@ -51,6 +51,7 @@ idem_install() {
     ############################################################################
     info "installing npm packages"
     ! type -a tldr && npm install -g tldr && restow_node
+    ! type -a tldr && npm install -g lumo-cljs && restow_node
     ############################################################################
     info "installing rq"
     pushd $HOME/.local/bin
