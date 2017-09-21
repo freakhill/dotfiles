@@ -107,7 +107,7 @@ post_install() {
     done
 
     info "running fzf install script"
-    ( $PEARL_PKGVARDIR/junegunn/fzf/install )
+    ( $PEARL_PKGVARDIR/junegunn/fzf/install --key-bindings --completion --no-update-rc)
 
     info "make sur that our homemade ssh/scp scripts run fine"
     mkdir -p $HOME/.ssh/config.0
