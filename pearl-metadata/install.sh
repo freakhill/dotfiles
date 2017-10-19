@@ -51,6 +51,7 @@ idem_install() {
     ############################################################################
     info "installing npm packages"
     ! type -a tldr && npm install -g tldr && restow_node
+    ! type -a tldr && npm install -g lumo-cljs && restow_node
     ############################################################################
     info "installing rq"
     pushd $HOME/.local/bin
@@ -106,7 +107,7 @@ post_install() {
     done
 
     info "running fzf install script"
-    ( $PEARL_PKGVARDIR/junegunn/fzf/install )
+    ( $PEARL_PKGVARDIR/junegunn/fzf/install --key-bindings --completion --no-update-rc)
 
     info "make sur that our homemade ssh/scp scripts run fine"
     mkdir -p $HOME/.ssh/config.0
