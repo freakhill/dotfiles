@@ -5,12 +5,13 @@
                        #_[im.chit/lucid.query "1.3.13"]
                        #_[im.chit/lucid.system "1.3.13"]
                        #_[im.chit/lucid.package "1.3.13"]
-                       [org.clojure/core.typed "0.4.3"]
-                       [org.sonatype.aether/aether-util "1.13.1"]]
+                       [org.clojure/core.typed "0.4.3"]]
         :plugins      [[lein-ancient "0.6.10"]
-                       #_[lein-voom "0.1.0-20170920_222746-ga58a315"]
+                       [org.sonatype.aether/aether-util "1.13.1"]
+                       [lein-voom "0.1.0-20170920_222746-ga58a315"]
                        [cider/cider-nrepl "0.15.1"]
                        [refactor-nrepl "2.3.1"]
+                       [lein-typed "0.4.2"]
                        [lein-pprint "1.1.2"]]
         :injections   [#_(require '[lucid.git :as lgit])
                        #_(require '[lucid.graph :as lgraph])
