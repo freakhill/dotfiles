@@ -121,9 +121,14 @@ post_install() {
 
     info "link tmux and git config"
     rm -f $HOME/.tmux.conf
-    rm -f $HOME/.gitconfig
     ln -s "$PEARL_PKGDIR/tmux.conf" $HOME/.tmux.conf
+    info "link git config"
+    rm -f $HOME/.gitconfig
     ln -s "$PEARL_PKGDIR/gitconfig" $HOME/.gitconfig
+    info "link lein profile"
+    mkdir -p $HOME/.lein
+    rm -f $HOME/.lein/profiles.clj
+    ln -s "$PEARL_PKGDIR/profiles.clj" $HOME/.lein/profiles.clj
 
     info "adding bashrc source to bash_profile for ssh"
     printf "\n[ -f ~/.bashrc ] && source ~/.bashrc\n" >> ~/.bash_profile
