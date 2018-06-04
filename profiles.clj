@@ -12,7 +12,7 @@
                        [cider/cider-nrepl "0.17.0"]
                        #_[refactor-nrepl "2.3.1"]
                        #_[lein-typed "0.4.3"]
-                       [lein-pprint "1.2.0"]]
+                       #_[lein-pprint "1.2.0"]]
         :injections   [#_(require '[lucid.git :as lgit])
                        #_(require '[lucid.graph :as lgraph])
                        (require '[lucid.mind :as lm])
