@@ -4,72 +4,24 @@ packages_from_github() {
     PACKAGES_FROM_GITHUB[0]="sstephenson/bats"           # tests in bash
     PACKAGES_FROM_GITHUB[1]="freakhill/scripts"          # my script
     PACKAGES_FROM_GITHUB[2]="fidian/ansi"                # colors and window title
-    PACKAGES_FROM_GITHUB[3]="clvv/fasd"                  # File Any Search Dir
     PACKAGES_FROM_GITHUB[4]="junegunn/fzf"               # fuzzy file finder
     PACKAGES_FROM_GITHUB[5]="paoloantinori/hhighlighter" # highlights
-    PACKAGES_FROM_GITHUB[6]="shyiko/commacd"             # ,(forward) ,,(back) ,,,(both)
     PACKAGES_FROM_GITHUB[7]="tests-always-included/mo"   # moustache templates in bash
 
     echo ${PACKAGES_FROM_GITHUB[@]}
 }
 
-restow() {
-        stow -d $PEARL_PKGVARDIR -t $HOME/.local -R $1
-}
-
 idem_install() {
-    info "idempotent install"
     ############################################################################
     info "installing pearl packages"
     try pearl install liquidprompt ls-colors
     ############################################################################
-    info "installing cargo packages"
-    ! type -a racer && cargo install racer
-    ! type -a parallel && cargo install parallel
-    ! type -a rg && cargo install ripgrep
-    ############################################################################
-    info "installing guix packages"
-    ! type -a go && guix package -i go
-    ! type -a ruby && guix package -i ruby
-    ! type -a jq && guix package -i jq
-    ### guix node package is broken so we install with stow
-    #guix package -i node
-    info "installing nodejs"
-    if ! type -a npm
-    then
-        mkdir -p $HOME/.stow
-        pushd $PEARL_PKGVARDIR
-        wget https://nodejs.org/dist/v6.9.3/node-v6.9.3-linux-x64.tar.xz
-        tar xf node-v6.9.3-linux-x64.tar.xz
-        rm node-v6.9.3-linux-x64.tar.xz
-        restow node-v6.9.3-linux-x64
-        popd
-    fi
-    restow_node() {
-        restow node-v6.9.3-linux-x64
-    }
-    ############################################################################
-    info "installing npm packages"
-    ! type -a tldr && npm install -g tldr && restow_node
-    ! type -a tldr && npm install -g lumo-cljs && restow_node
-    ############################################################################
-    info "installing rq"
-    pushd $HOME/.local/bin
-    if ! type -a rq
-    then
-        curl -fsSLo rq https://s3-eu-west-1.amazonaws.com/record-query/record-query/x86_64-unknown-linux-musl/rq
-        chmod +x rq
-    fi
-    ############################################################################
-    info "installing lein"
-    if ! type -a lein
-    then
-        pushd ~/.local/bin
-        curl -fsSL https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > lein
-        chmod +x lein
-        ./lein
-        popd
-    fi
+    info "installing lumo"
+    ! type -a lumo && (
+        cd ~
+        npm install lumo-cljs
+        ln -s $HOME/node_modules/lumo-cljs/download/dist/lumo $HOME/.local/bin/lumo
+    )
 }
 
 install_from_github() {

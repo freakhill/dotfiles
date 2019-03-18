@@ -9,27 +9,8 @@ eval "$(fasd --init auto)"
 [[ $- = *i* ]] && source $PEARL_PKGVARDIR/freakhill/scripts/lib/git_completion
 [[ $- = *i* ]] && source $PEARL_PKGVARDIR/freakhill/scripts/lib/srsh_completion
 [[ $- = *i* ]] && source $PEARL_PKGVARDIR/paoloantinori/hhighlighter/h.sh
-[[ $- = *i* ]] && source $PEARL_PKGVARDIR/shyiko/commacd/commacd.sh
 [[ $- = *i* ]] && source $PEARL_PKGVARDIR/tests-always-included/mo/mo
 [[ $- = *i* ]] && [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# link bash history from dropbox
-if ! [ -f ~/.dropbox_linked ]
-then
-  if [ -f ~/Dropbox/bash_history ]
-  then
-    ln -sf ~/Dropbox/bash_history ~/.bash_history
-    touch ~/.dropbox_linked
-  elif [ -f /host/Dropbox/bash_history ]
-  then
-    ln -sf /host/Dropbox/bash_history ~/.bash_history
-    touch ~/.dropbox_linked
-  elif [ -f /Dropbox ]
-  then
-    ln -sf /Dropbox ~/.bash_history
-    touch ~/.dropbox_linked
-  fi
-fi
 
 shopt -s histappend              # append new history items to .bash_history
 export HISTCONTROL=ignorespace   # leading space hides commands from history
