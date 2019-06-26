@@ -11,19 +11,6 @@ packages_from_github() {
     echo ${PACKAGES_FROM_GITHUB[@]}
 }
 
-idem_install() {
-    ############################################################################
-    info "installing pearl packages"
-    try pearl install liquidprompt ls-colors
-    ############################################################################
-    info "installing lumo"
-    ! type -a lumo && (
-        cd ~
-        npm install lumo-cljs
-        ln -s $HOME/node_modules/lumo-cljs/download/dist/lumo $HOME/.local/bin/lumo
-    )
-}
-
 install_from_github() {
     local dir="${PEARL_PKGVARDIR}/$1"
     if ! [ -d "$dir" ]
@@ -100,7 +87,6 @@ post_update() {
         install_from_github $pkg
         update_from_github $pkg
     done
-    idem_install
 }
 
 pre_remove() {
