@@ -11,6 +11,11 @@ packages_from_github() {
     echo ${PACKAGES_FROM_GITHUB[@]}
 }
 
+idem_install() {
+    info "installing pearl packages"
+    try pearl install liquidprompt ls-colors
+}
+
 install_from_github() {
     local dir="${PEARL_PKGVARDIR}/$1"
     if ! [ -d "$dir" ]
@@ -34,6 +39,7 @@ update_from_github() {
     git pull
     try stow -d "$dir/.." -t $HOME/.local -R $(echo "$1" | cut -f2 -d'/')
     popd
+    idem_install
 }
 
 post_install() {
